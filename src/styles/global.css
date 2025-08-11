@@ -1,0 +1,25 @@
+/* src/styles/global.css */
+:root {
+  --color-primary: #ff6b6b;
+  --color-secondary: #ffa3a3;
+  --color-bg: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
+  --color-text: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  color: var(--color-text);
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

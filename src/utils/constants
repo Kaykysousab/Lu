@@ -1,0 +1,30 @@
+// src/utils/constants.ts
+export const timelineEvents = [
+  {
+    title: "Nosso Primeiro Encontro",
+    date: "15 de Março de 2023",
+    description: "O dia em que tudo começou...",
+    image: "/fotos/primeiro-encontro.jpg",
+    caption: "Nossos primeiros sorrisos"
+  },
+  {
+    title: "Nosso Primeiro Beijo",
+    date: "20 de Março de 2023",
+    description: "O momento em que tudo mudou...",
+    image: "/fotos/primeiro-beijo.jpg",
+    caption: "Dia inesquecível"
+  }
+  // Adicione mais eventos conforme necessário
+];
+
+export const messages = [
+  {
+    trigger: "Quando você ri...",
+    content: "o meu dia fica 300% mais leve"
+  },
+  {
+    trigger: "Seu olhar...",
+    content: "me desconecta da realidade"
+  }
+  // Adicione mais mensagens conforme necessário
+];

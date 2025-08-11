@@ -1,0 +1,23 @@
+---
+import Timeline from '../components/Timeline.astro';
+
+const timelineEvents = [
+  {
+    title: "Primeiro Encontro",
+    date: "15/03/2023",
+    description: "O dia em que nos conhecemos pessoalmente",
+    image: "/fotos/primeiro-encontro.jpg"
+  },
+  {
+    title: "Primeiro Beijo",
+    date: "20/03/2023",
+    description: "O momento que mudou tudo entre nós"
+  }
+];
+---
+
+<main>
+  <h1>Nossa Linha do Tempo</h1>
+  <Timeline events={timelineEvents} />
+  <a href="/significados" class="btn">Próximo</a>
+</main>

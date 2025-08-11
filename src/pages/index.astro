@@ -1,0 +1,33 @@
+---
+import Navbar from '../components/Navigation.astro';
+import '../styles/global.css';
+---
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Para Ludmylla ❤️</title>
+</head>
+<body>
+  <Navbar />
+  <main>
+    <h1>Nossa Jornada</h1>
+    <a href="/historia" class="btn">Começar</a>
+  </main>
+</body>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+    color: white;
+    font-family: 'Arial', sans-serif;
+  }
+  .btn {
+    background: #ff6b6b;
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+  }
+</style>

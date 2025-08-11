@@ -1,0 +1,29 @@
+---
+// src/layouts/MainLayout.astro
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludmylla, Nossa História</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <Navigation />
+    <slot />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</body>
+</html>
