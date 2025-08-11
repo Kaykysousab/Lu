@@ -1,0 +1,117 @@
+---
+import Navigation from '../components/Navigation.astro';
+import FloatingHearts from '../components/FloatingHearts.astro';
+import Timeline from '../components/Timeline.astro';
+import ChatBot from '../components/ChatBot';
+import '../styles/global.css';
+
+const timelineEvents = [
+  {
+    title: "Nosso Primeiro Encontro",
+    date: "15 de Março de 2023",
+    description: "O dia em que tudo começou... Lembro como se fosse ontem, quando nossos olhares se cruzaram pela primeira vez. Havia algo mágico no ar, uma conexão instantânea que eu nunca havia sentido antes. Você estava linda, com aquele sorriso que iluminou meu dia inteiro.",
+    image: "https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "O momento que mudou nossas vidas para sempre ✨"
+  },
+  {
+    title: "Nossa Primeira Conversa",
+    date: "16 de Março de 2023",
+    description: "Conversamos por horas e horas... Era como se nos conhecêssemos há anos. Cada palavra sua me encantava mais, cada risada sua fazia meu coração acelerar. Descobrimos que tínhamos tanto em comum, mas ao mesmo tempo, nossas diferenças se complementavam perfeitamente.",
+    image: "https://images.pexels.com/photos/1024992/pexels-photo-1024992.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "Horas que pareceram minutos 💭"
+  },
+  {
+    title: "Nosso Primeiro Beijo",
+    date: "20 de Março de 2023",
+    description: "O momento mais mágico de todos... Sob as estrelas, com a lua como nossa única testemunha, nossos lábios se encontraram pela primeira vez. Foi como se o mundo inteiro parasse, como se aquele momento fosse eterno. Senti borboletas no estômago e soube que estava perdidamente apaixonado.",
+    image: "https://images.pexels.com/photos/1024994/pexels-photo-1024994.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "Nosso primeiro beijo sob as estrelas 🌟"
+  },
+  {
+    title: "Nosso Primeiro 'Eu Te Amo'",
+    date: "2 de Abril de 2023",
+    description: "As palavras mais sinceras que já saíram do meu coração... Não conseguia mais guardar esse sentimento. Olhando nos seus olhos, com toda a coragem do mundo, eu disse pela primeira vez: 'Eu te amo'. E quando você respondeu da mesma forma, senti que estava completo.",
+    image: "https://images.pexels.com/photos/1024995/pexels-photo-1024995.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "As palavras mais importantes das nossas vidas 💕"
+  },
+  {
+    title: "Nossa Primeira Viagem",
+    date: "15 de Maio de 2023",
+    description: "Descobrindo o mundo juntos... Nossa primeira aventura como casal foi incrível. Cada lugar que visitamos se tornou especial porque estava com você. Criamos memórias que levarei para sempre no coração, e cada foto é um tesouro dos nossos momentos felizes.",
+    image: "https://images.pexels.com/photos/1024996/pexels-photo-1024996.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "Explorando o mundo de mãos dadas 🌍"
+  },
+  {
+    title: "Nosso Primeiro Ano",
+    date: "15 de Março de 2024",
+    description: "365 dias de puro amor... Um ano inteiro ao seu lado passou como um sonho. Foram 365 dias de sorrisos, abraços, beijos, conversas, aventuras e muito amor. Cada dia com você é uma nova descoberta, uma nova razão para ser grato por ter você na minha vida.",
+    image: "https://images.pexels.com/photos/1024997/pexels-photo-1024997.jpeg?auto=compress&cs=tinysrgb&w=400",
+    caption: "Um ano de amor incondicional 🎂"
+  }
+];
+---
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossa História ❤️ - Para Ludmylla</title>
+  <meta name="description" content="A linha do tempo da nossa história de amor, com todos os momentos especiais que vivemos juntos.">
+</head>
+<body>
+  <Navigation />
+  <FloatingHearts />
+  
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-900"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+    
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <h1 class="text-6xl md:text-7xl font-dancing font-bold text-white mb-8 animate-fade-in">
+        Nossa História de Amor 📖
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed animate-slide-up">
+        Cada momento ao seu lado é uma página especial no livro da nossa vida. 
+        Aqui estão os capítulos mais importantes da nossa jornada juntos ✨
+      </p>
+      
+      <div class="animate-bounce">
+        <div class="text-4xl">💕</div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Timeline Section -->
+  <Timeline events={timelineEvents} />
+  
+  <!-- Navigation Section -->
+  <section class="py-20 bg-gradient-to-t from-black to-transparent">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <h2 class="text-4xl font-dancing font-bold text-white mb-8">
+        Continue Nossa Jornada ✨
+      </h2>
+      <p class="text-xl text-gray-200 mb-12">
+        Nossa história está apenas começando... Vamos descobrir o que mais te espera!
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-6">
+        <a 
+          href="/significados" 
+          class="bg-gradient-to-r from-romantic-pink to-romantic-purple px-8 py-4 rounded-full text-white text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+        >
+          💝 O Que Você Significa Para Mim
+        </a>
+        <a 
+          href="/quiz" 
+          class="glass-effect px-8 py-4 rounded-full text-white hover:bg-white hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
+        >
+          🎯 Teste Seus Conhecimentos
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <ChatBot client:load />
+</body>
+</html>

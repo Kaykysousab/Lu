@@ -1,0 +1,360 @@
+---
+import Navigation from '../components/Navigation.astro';
+import FloatingHearts from '../components/FloatingHearts.astro';
+import ChatBot from '../components/ChatBot';
+import '../styles/global.css';
+---
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uma Surpresa Especial ❤️ - Para Ludmylla</title>
+  <meta name="description" content="A surpresa mais especial que preparei para você, Ludmylla.">
+</head>
+<body>
+  <Navigation />
+  <FloatingHearts />
+  
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900 via-rose-800 to-red-900"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-10 left-10 w-20 h-20 bg-romantic-pink bg-opacity-30 rounded-full animate-float"></div>
+      <div class="absolute top-32 right-20 w-16 h-16 bg-romantic-gold bg-opacity-40 rounded-full animate-float" style="animation-delay: 1s;"></div>
+      <div class="absolute bottom-20 left-32 w-24 h-24 bg-romantic-lavender bg-opacity-20 rounded-full animate-float" style="animation-delay: 2s;"></div>
+      <div class="absolute bottom-40 right-40 w-18 h-18 bg-romantic-rose bg-opacity-35 rounded-full animate-float" style="animation-delay: 0.5s;"></div>
+    </div>
+    
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-6">
+      <div class="text-center">
+        <h1 class="text-6xl md:text-8xl font-dancing font-bold text-white mb-8 animate-fade-in">
+          Uma Surpresa Especial 💍
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed animate-slide-up">
+          Ludmylla, chegou o momento mais importante... ✨
+        </p>
+        
+        <!-- Surprise Container -->
+        <div class="glass-effect rounded-3xl p-8 md:p-16 animate-slide-up max-w-4xl mx-auto" style="animation-delay: 0.5s;">
+          
+          <!-- Initial Message -->
+          <div id="initial-message" class="text-center">
+            <div class="text-8xl mb-8 animate-heart-beat">💝</div>
+            <h2 class="text-4xl font-dancing font-bold text-white mb-8">
+              Você está pronta para a surpresa?
+            </h2>
+            <p class="text-xl text-gray-200 mb-12 leading-relaxed">
+              Depois de toda nossa jornada, de todos os momentos especiais que vivemos, 
+              chegou a hora de fazer a pergunta mais importante da minha vida...
+            </p>
+            
+            <button 
+              id="reveal-btn"
+              class="bg-gradient-to-r from-romantic-pink to-romantic-purple px-12 py-4 rounded-full text-white text-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 sparkle-effect"
+              onclick="revealSurprise()"
+            >
+              💖 Revelar Surpresa
+            </button>
+          </div>
+          
+          <!-- Surprise Content (Hidden Initially) -->
+          <div id="surprise-content" class="hidden text-center">
+            <div class="mb-12">
+              <div class="text-9xl mb-8 animate-bounce">💍</div>
+              <h2 class="text-5xl md:text-6xl font-dancing font-bold text-white mb-8 animate-heart-beat">
+                Ludmylla...
+              </h2>
+            </div>
+            
+            <div class="space-y-8 text-xl md:text-2xl text-gray-200 leading-relaxed mb-12">
+              <p class="animate-fade-in" style="animation-delay: 1s;">
+                Você transformou minha vida de uma forma que eu nunca imaginei ser possível...
+              </p>
+              <p class="animate-fade-in" style="animation-delay: 2s;">
+                Cada dia ao seu lado é uma nova descoberta, uma nova razão para sorrir...
+              </p>
+              <p class="animate-fade-in" style="animation-delay: 3s;">
+                Você é meu presente, meu futuro, minha felicidade...
+              </p>
+              <p class="animate-fade-in text-3xl font-bold text-romantic-gold" style="animation-delay: 4s;">
+                E eu quero passar o resto da minha vida provando o quanto te amo!
+              </p>
+            </div>
+            
+            <!-- The Big Question -->
+            <div class="bg-gradient-to-r from-romantic-pink to-romantic-purple rounded-3xl p-12 mb-12 animate-slide-up" style="animation-delay: 5s;">
+              <h3 class="text-4xl md:text-5xl font-dancing font-bold text-white mb-8">
+                A Pergunta Mais Importante...
+              </h3>
+              <p class="text-3xl md:text-4xl font-bold text-white mb-8 animate-heart-beat">
+                Ludmylla, você quer namorar comigo? 💕
+              </p>
+              
+              <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button 
+                  onclick="answerYes()"
+                  class="bg-green-500 hover:bg-green-600 px-12 py-4 rounded-full text-white text-2xl font-bold hover:shadow-2xl hover:scale-110 transition-all duration-300 animate-pulse-slow"
+                >
+                  💖 SIM! EU ACEITO!
+                </button>
+                <button 
+                  onclick="answerMaybe()"
+                  class="glass-effect px-8 py-3 rounded-full text-white hover:bg-white hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
+                >
+                  🤔 Deixe-me pensar...
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Response Content (Hidden Initially) -->
+          <div id="response-content" class="hidden text-center">
+            <!-- Content will be added by JavaScript -->
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ChatBot client:load />
+  
+  <script>
+    function revealSurprise() {
+      const initialMessage = document.getElementById('initial-message');
+      const surpriseContent = document.getElementById('surprise-content');
+      
+      // Hide initial message with fade out
+      initialMessage.style.opacity = '0';
+      initialMessage.style.transform = 'translateY(-50px)';
+      initialMessage.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        initialMessage.classList.add('hidden');
+        surpriseContent.classList.remove('hidden');
+        surpriseContent.style.opacity = '0';
+        surpriseContent.style.transform = 'translateY(50px)';
+        
+        // Animate in surprise content
+        setTimeout(() => {
+          surpriseContent.style.opacity = '1';
+          surpriseContent.style.transform = 'translateY(0)';
+          surpriseContent.style.transition = 'all 0.8s ease';
+        }, 100);
+      }, 500);
+      
+      // Add celebration effects
+      createCelebration();
+    }
+    
+    function answerYes() {
+      const surpriseContent = document.getElementById('surprise-content');
+      const responseContent = document.getElementById('response-content');
+      
+      // Hide surprise content
+      surpriseContent.style.opacity = '0';
+      surpriseContent.style.transform = 'translateY(-50px)';
+      surpriseContent.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        surpriseContent.classList.add('hidden');
+        
+        responseContent.innerHTML = `
+          <div class="animate-fade-in">
+            <div class="text-9xl mb-8 animate-bounce">🎉</div>
+            <h2 class="text-6xl font-dancing font-bold text-white mb-8 animate-heart-beat">
+              SIIIIM! 💕
+            </h2>
+            <div class="bg-gradient-to-r from-green-400 to-green-600 rounded-3xl p-12 mb-8">
+              <p class="text-3xl font-bold text-white mb-6">
+                Você me fez a pessoa mais feliz do mundo! 🌟
+              </p>
+              <p class="text-xl text-white leading-relaxed">
+                Agora nossa jornada de amor oficial começa! 
+                Prometo te amar, te cuidar e te fazer sorrir todos os dias da nossa vida! ✨
+              </p>
+            </div>
+            
+            <div class="space-y-6">
+              <div class="text-6xl animate-heart-beat">💖💖💖</div>
+              <p class="text-2xl text-gray-200 font-bold">
+                EU TE AMO, LUDMYLLA! 
+              </p>
+              <p class="text-lg text-gray-300">
+                Agora somos oficialmente namorados! 🥰
+              </p>
+              
+              <button 
+                onclick="celebrateMore()"
+                class="bg-gradient-to-r from-romantic-pink to-romantic-purple px-8 py-4 rounded-full text-white text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 sparkle-effect"
+              >
+                🎊 Mais Celebração!
+              </button>
+            </div>
+          </div>
+        `;
+        
+        responseContent.classList.remove('hidden');
+        
+        // Mega celebration
+        createMegaCelebration();
+        
+      }, 500);
+    }
+    
+    function answerMaybe() {
+      const surpriseContent = document.getElementById('surprise-content');
+      const responseContent = document.getElementById('response-content');
+      
+      surpriseContent.style.opacity = '0';
+      surpriseContent.style.transform = 'translateY(-50px)';
+      surpriseContent.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        surpriseContent.classList.add('hidden');
+        
+        responseContent.innerHTML = `
+          <div class="animate-fade-in">
+            <div class="text-8xl mb-8 animate-bounce">🥺</div>
+            <h2 class="text-5xl font-dancing font-bold text-white mb-8">
+              Tudo bem, eu espero! 💕
+            </h2>
+            <div class="glass-effect rounded-3xl p-8 mb-8">
+              <p class="text-xl text-gray-200 leading-relaxed mb-6">
+                Não tem pressa, meu amor! O importante é que você saiba 
+                o quanto você significa para mim. ✨
+              </p>
+              <p class="text-lg text-gray-300 mb-6">
+                Vou continuar te amando e esperando o momento certo! 🌟
+              </p>
+              
+              <div class="space-y-4">
+                <button 
+                  onclick="answerYes()"
+                  class="bg-gradient-to-r from-romantic-pink to-romantic-purple px-8 py-3 rounded-full text-white font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  💖 Na verdade... SIM!
+                </button>
+                <br>
+                <button 
+                  onclick="showMoreLove()"
+                  class="glass-effect px-6 py-2 rounded-full text-white hover:bg-white hover:bg-opacity-20 transition-all duration-300"
+                >
+                  💕 Me mostre mais amor
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        responseContent.classList.remove('hidden');
+        
+      }, 500);
+    }
+    
+    function celebrateMore() {
+      createMegaCelebration();
+      
+      // Add more celebration text
+      const responseContent = document.getElementById('response-content');
+      const celebrationDiv = document.createElement('div');
+      celebrationDiv.className = 'mt-8 animate-fade-in';
+      celebrationDiv.innerHTML = `
+        <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl p-6">
+          <p class="text-2xl font-bold text-white mb-4">
+            🎉 CELEBRAÇÃO INFINITA! 🎉
+          </p>
+          <p class="text-lg text-white">
+            Nosso amor merece toda a celebração do mundo! 💖✨🌟
+          </p>
+        </div>
+      `;
+      responseContent.appendChild(celebrationDiv);
+    }
+    
+    function showMoreLove() {
+      const responseContent = document.getElementById('response-content');
+      const loveDiv = document.createElement('div');
+      loveDiv.className = 'mt-8 animate-fade-in';
+      loveDiv.innerHTML = `
+        <div class="bg-gradient-to-r from-romantic-pink to-romantic-purple rounded-2xl p-8">
+          <h3 class="text-3xl font-dancing font-bold text-white mb-6">
+            Mais Razões Para Te Amar 💕
+          </h3>
+          <div class="space-y-4 text-white">
+            <p>🌟 Seu sorriso ilumina meus dias</p>
+            <p>💖 Sua bondade aquece meu coração</p>
+            <p>✨ Sua inteligência me inspira</p>
+            <p>🌈 Sua presença torna tudo melhor</p>
+            <p>💫 Você é simplesmente perfeita!</p>
+          </div>
+          
+          <button 
+            onclick="answerYes()"
+            class="mt-6 bg-white text-romantic-pink px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all duration-300 hover:scale-105"
+          >
+            💖 Agora eu aceito!
+          </button>
+        </div>
+      `;
+      responseContent.appendChild(loveDiv);
+    }
+    
+    function createCelebration() {
+      // Create floating hearts
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.innerHTML = '💖';
+          heart.style.position = 'fixed';
+          heart.style.left = Math.random() * window.innerWidth + 'px';
+          heart.style.top = window.innerHeight + 'px';
+          heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+          heart.style.zIndex = '1000';
+          heart.style.pointerEvents = 'none';
+          heart.style.animation = 'float 4s linear forwards';
+          
+          document.body.appendChild(heart);
+          
+          setTimeout(() => {
+            if (heart.parentNode) {
+              heart.parentNode.removeChild(heart);
+            }
+          }, 4000);
+        }, i * 200);
+      }
+    }
+    
+    function createMegaCelebration() {
+      // Create massive celebration with different emojis
+      const celebrationEmojis = ['🎉', '💖', '✨', '🌟', '💕', '🎊', '💍', '🥰', '😍', '💝'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const emoji = document.createElement('div');
+          emoji.innerHTML = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+          emoji.style.position = 'fixed';
+          emoji.style.left = Math.random() * window.innerWidth + 'px';
+          emoji.style.top = window.innerHeight + 'px';
+          emoji.style.fontSize = (Math.random() * 40 + 25) + 'px';
+          emoji.style.zIndex = '1000';
+          emoji.style.pointerEvents = 'none';
+          emoji.style.animation = 'float 6s linear forwards';
+          
+          document.body.appendChild(emoji);
+          
+          setTimeout(() => {
+            if (emoji.parentNode) {
+              emoji.parentNode.removeChild(emoji);
+            }
+          }, 6000);
+        }, i * 100);
+      }
+    }
+  </script>
+</body>
+</html>

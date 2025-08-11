@@ -2,43 +2,77 @@
 // src/components/Navigation.astro
 ---
 
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/nossa-historia">Nossa História</a></li>
-        <li><a href="/significados">O Que Você Significa</a></li>
-        <li><a href="/quiz">Quiz</a></li>
-        <li><a href="/pedido">Surpresa</a></li>
-    </ul>
+<nav class="fixed top-0 w-full z-50 glass-effect transition-all duration-300" id="navbar">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <div class="text-2xl font-dancing font-bold text-white">
+        💕 Para Ludmylla
+      </div>
+      
+      <ul class="hidden md:flex space-x-8">
+        <li><a href="/" class="nav-link">🏠 Início</a></li>
+        <li><a href="/nossa-historia" class="nav-link">📖 Nossa História</a></li>
+        <li><a href="/significados" class="nav-link">💝 Significados</a></li>
+        <li><a href="/quiz" class="nav-link">🎯 Quiz</a></li>
+        <li><a href="/pedido" class="nav-link">💍 Surpresa</a></li>
+      </ul>
+      
+      <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+        ☰
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="md:hidden mt-4 hidden" id="mobile-menu">
+      <ul class="space-y-4">
+        <li><a href="/" class="nav-link block">🏠 Início</a></li>
+        <li><a href="/nossa-historia" class="nav-link block">📖 Nossa História</a></li>
+        <li><a href="/significados" class="nav-link block">💝 Significados</a></li>
+        <li><a href="/quiz" class="nav-link block">🎯 Quiz</a></li>
+        <li><a href="/pedido" class="nav-link block">💍 Surpresa</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <style>
-    nav {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 1rem;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 100;
-    }
-
-    ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    a:hover {
-        color: #ff6b6b;
-    }
+  .nav-link {
+    @apply text-white font-medium transition-all duration-300 hover:text-romantic-pink hover:scale-110 relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
 </style>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar?.classList.add('bg-black', 'bg-opacity-20');
+    } else {
+      navbar?.classList.remove('bg-black', 'bg-opacity-20');
+    }
+  });
+</script>

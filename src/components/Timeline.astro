@@ -1,7 +1,5 @@
 ---
 // src/components/Timeline.astro
-
-// 1. Primeiro definimos a interface para os eventos da timeline
 interface TimelineEvent {
   title: string;
   date?: string;
@@ -10,131 +8,146 @@ interface TimelineEvent {
   caption?: string;
 }
 
-// 2. Definimos as props do componente
 interface Props {
   events: TimelineEvent[];
 }
 
-// 3. Tipamos explicitamente as props recebidas
 const { events } = Astro.props as Props;
 ---
 
-<div class="timeline">
-  {events.map((event: TimelineEvent, index: number) => (
-    <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-      <div class="content">
-        <h3>{event.title}</h3>
-        {event.date && <p class="date">{event.date}</p>}
-        <p>{event.description}</p>
-        {event.image && (
-          <div class="polaroid">
-            <img 
-              src={event.image} 
-              alt={event.caption || event.title} 
-              width="200" 
-              height="auto" 
-              loading="lazy"
-            />
-            {event.caption && <p>{event.caption}</p>}
+<div class="timeline-container py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-5xl font-dancing font-bold text-center text-white mb-16 animate-fade-in">
+      Nossa Linha do Tempo 💕
+    </h2>
+    
+    <div class="relative">
+      <!-- Timeline Line -->
+      <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-romantic-pink to-romantic-purple rounded-full"></div>
+      
+      {events.map((event, index) => (
+        <div class={`timeline-item mb-16 ${index % 2 === 0 ? 'timeline-left' : 'timeline-right'}`}>
+          <div class="timeline-content glass-effect rounded-2xl p-8 relative animate-slide-up" style={`animation-delay: ${index * 0.3}s`}>
+            <!-- Timeline Dot -->
+            <div class="timeline-dot absolute w-6 h-6 bg-gradient-to-r from-romantic-pink to-romantic-purple rounded-full border-4 border-white shadow-lg"></div>
+            
+            <div class="content">
+              <h3 class="text-2xl font-bold text-white mb-2 font-dancing">{event.title}</h3>
+              {event.date && (
+                <p class="text-romantic-gold font-semibold mb-4 text-lg">📅 {event.date}</p>
+              )}
+              <p class="text-gray-200 text-lg leading-relaxed mb-6">{event.description}</p>
+              
+              {event.image && (
+                <div class="polaroid-container">
+                  <div class="polaroid">
+                    <img 
+                      src={event.image} 
+                      alt={event.caption || event.title}
+                      class="w-full h-48 object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                    {event.caption && (
+                      <p class="polaroid-caption">{event.caption}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      ))}
     </div>
-  ))}
+  </div>
 </div>
 
 <style>
-  .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 0;
+  .timeline-container {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
   }
-
-  .timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: rgba(255, 255, 255, 0.3);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
-    border-radius: 3px;
-  }
-
+  
   .timeline-item {
-    padding: 10px 40px;
     position: relative;
     width: 50%;
-    box-sizing: border-box;
   }
-
-  .timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -12px;
-    background-color: #ff6b6b;
-    border: 4px solid #ffa3a3;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
-  }
-
-  .left {
+  
+  .timeline-left {
     left: 0;
+    padding-right: 3rem;
+  }
+  
+  .timeline-right {
+    left: 50%;
+    padding-left: 3rem;
+  }
+  
+  .timeline-left .timeline-content {
     text-align: right;
   }
-
-  .right {
-    left: 50%;
+  
+  .timeline-right .timeline-content {
     text-align: left;
   }
-
-  .right::after {
-    left: -12px;
+  
+  .timeline-left .timeline-dot {
+    right: -3rem;
+    top: 2rem;
+    transform: translateX(50%);
   }
-
-  .content {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    margin-bottom: 20px;
+  
+  .timeline-right .timeline-dot {
+    left: -3rem;
+    top: 2rem;
+    transform: translateX(-50%);
   }
-
-  .date {
-    color: #ffa3a3;
-    font-style: italic;
-    margin: 0.5rem 0;
+  
+  .polaroid-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
   }
-
+  
   .polaroid {
     background: white;
-    padding: 15px 15px 40px 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: rotate(-5deg);
-    margin: 20px auto;
-    display: inline-block;
-    color: black;
+    padding: 1rem 1rem 3rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: rotate(-2deg);
     transition: all 0.3s ease;
-    max-width: 200px;
+    max-width: 300px;
   }
-
+  
   .polaroid:hover {
     transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   }
-
-  .polaroid img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .polaroid p {
-    margin-top: 10px;
+  
+  .polaroid-caption {
+    color: #333;
     text-align: center;
-    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .timeline-item {
+      width: 100%;
+      left: 0 !important;
+      padding-left: 3rem !important;
+      padding-right: 1rem !important;
+    }
+    
+    .timeline-content {
+      text-align: left !important;
+    }
+    
+    .timeline-dot {
+      left: -3rem !important;
+      right: auto !important;
+      transform: translateX(-50%) !important;
+    }
   }
 </style>

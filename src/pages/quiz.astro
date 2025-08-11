@@ -1,0 +1,252 @@
+---
+import Navigation from '../components/Navigation.astro';
+import FloatingHearts from '../components/FloatingHearts.astro';
+import ChatBot from '../components/ChatBot';
+import '../styles/global.css';
+---
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz do Amor ❤️ - Para Ludmylla</title>
+  <meta name="description" content="Um quiz especial para testar o quanto você conhece nossa história de amor.">
+</head>
+<body>
+  <Navigation />
+  <FloatingHearts />
+  
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+    
+    <div class="relative z-10 w-full max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h1 class="text-6xl md:text-7xl font-dancing font-bold text-white mb-8 animate-fade-in">
+          Quiz do Nosso Amor 🎯
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed animate-slide-up">
+          Vamos testar o quanto você lembra da nossa história especial! ✨
+        </p>
+      </div>
+      
+      <!-- Quiz Container -->
+      <div class="glass-effect rounded-3xl p-8 md:p-12 animate-slide-up" id="quiz-container">
+        <div id="quiz-content">
+          <!-- Quiz será carregado aqui via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ChatBot client:load />
+  
+  <script>
+    const quizData = [
+      {
+        question: "Qual foi a data do nosso primeiro encontro?",
+        options: ["14 de Março de 2023", "15 de Março de 2023", "16 de Março de 2023", "17 de Março de 2023"],
+        correct: 1,
+        explanation: "Foi no dia 15 de Março de 2023, um dia que mudou nossas vidas para sempre! 💕"
+      },
+      {
+        question: "Onde foi nosso primeiro beijo?",
+        options: ["No parque", "Sob as estrelas", "No cinema", "Em casa"],
+        correct: 1,
+        explanation: "Foi sob as estrelas, com a lua como nossa testemunha! Um momento mágico! 🌟"
+      },
+      {
+        question: "Quando dissemos 'Eu te amo' pela primeira vez?",
+        options: ["25 de Março de 2023", "30 de Março de 2023", "2 de Abril de 2023", "5 de Abril de 2023"],
+        correct: 2,
+        explanation: "Foi no dia 2 de Abril de 2023, as palavras mais sinceras que saíram do meu coração! ❤️"
+      },
+      {
+        question: "Qual foi nossa primeira viagem juntos?",
+        options: ["Praia", "Montanha", "Cidade histórica", "Campo"],
+        correct: 0,
+        explanation: "Nossa primeira aventura foi na praia, onde criamos memórias inesquecíveis! 🏖️"
+      },
+      {
+        question: "O que mais amo em você?",
+        options: ["Seu sorriso", "Sua bondade", "Tudo", "Seus olhos"],
+        correct: 2,
+        explanation: "Amo TUDO em você! Cada detalhe, cada gesto, cada palavra! Você é perfeita! 💖"
+      }
+    ];
+    
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+    
+    function loadQuestion() {
+      const question = quizData[currentQuestion];
+      const quizContent = document.getElementById('quiz-content');
+      
+      quizContent.innerHTML = `
+        <div class="text-center mb-8">
+          <div class="text-romantic-gold text-lg font-semibold mb-2">
+            Pergunta ${currentQuestion + 1} de ${quizData.length}
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-2 mb-6">
+            <div class="bg-gradient-to-r from-romantic-pink to-romantic-purple h-2 rounded-full transition-all duration-500" 
+                 style="width: ${((currentQuestion + 1) / quizData.length) * 100}%"></div>
+          </div>
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center leading-relaxed">
+          ${question.question}
+        </h2>
+        
+        <div class="grid gap-4 mb-8">
+          ${question.options.map((option, index) => `
+            <button 
+              class="quiz-option glass-effect p-4 rounded-xl text-white text-left hover:bg-white hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
+              onclick="selectAnswer(${index})"
+              id="option-${index}"
+            >
+              <span class="font-semibold mr-3">${String.fromCharCode(65 + index)})</span>
+              ${option}
+            </button>
+          `).join('')}
+        </div>
+        
+        <div id="explanation" class="hidden bg-gradient-to-r from-romantic-pink to-romantic-purple p-6 rounded-xl text-white text-center mb-6">
+        </div>
+        
+        <div class="text-center">
+          <button 
+            id="next-btn" 
+            class="hidden bg-gradient-to-r from-romantic-gold to-yellow-500 px-8 py-3 rounded-full text-white font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+            onclick="nextQuestion()"
+          >
+            ${currentQuestion === quizData.length - 1 ? 'Ver Resultado 🎉' : 'Próxima Pergunta ➡️'}
+          </button>
+        </div>
+      `;
+      
+      answered = false;
+    }
+    
+    function selectAnswer(selectedIndex) {
+      if (answered) return;
+      
+      answered = true;
+      const question = quizData[currentQuestion];
+      const isCorrect = selectedIndex === question.correct;
+      
+      if (isCorrect) {
+        score++;
+      }
+      
+      // Destacar resposta correta e incorreta
+      question.options.forEach((_, index) => {
+        const option = document.getElementById(`option-${index}`);
+        if (index === question.correct) {
+          option.classList.add('bg-green-500', 'bg-opacity-50');
+          option.innerHTML += ' ✅';
+        } else if (index === selectedIndex && !isCorrect) {
+          option.classList.add('bg-red-500', 'bg-opacity-50');
+          option.innerHTML += ' ❌';
+        }
+        option.disabled = true;
+        option.classList.remove('hover:bg-white', 'hover:bg-opacity-20', 'hover:scale-105');
+      });
+      
+      // Mostrar explicação
+      const explanation = document.getElementById('explanation');
+      explanation.innerHTML = question.explanation;
+      explanation.classList.remove('hidden');
+      explanation.classList.add('animate-fade-in');
+      
+      // Mostrar botão próximo
+      document.getElementById('next-btn').classList.remove('hidden');
+      document.getElementById('next-btn').classList.add('animate-slide-up');
+    }
+    
+    function nextQuestion() {
+      currentQuestion++;
+      
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+    
+    function showResult() {
+      const percentage = (score / quizData.length) * 100;
+      let message, emoji, color;
+      
+      if (percentage === 100) {
+        message = "PERFEITO! Você conhece nossa história melhor do que eu! 🥰";
+        emoji = "🏆";
+        color = "from-yellow-400 to-yellow-600";
+      } else if (percentage >= 80) {
+        message = "Incrível! Você realmente prestou atenção em cada detalhe! 😍";
+        emoji = "🌟";
+        color = "from-green-400 to-green-600";
+      } else if (percentage >= 60) {
+        message = "Muito bem! Você conhece bem nossa história! 😊";
+        emoji = "💖";
+        color = "from-blue-400 to-blue-600";
+      } else {
+        message = "Que fofo! Vamos criar mais memórias juntos! 🥺";
+        emoji = "💕";
+        color = "from-pink-400 to-pink-600";
+      }
+      
+      const quizContent = document.getElementById('quiz-content');
+      quizContent.innerHTML = `
+        <div class="text-center animate-fade-in">
+          <div class="text-8xl mb-6 animate-bounce">${emoji}</div>
+          <h2 class="text-4xl font-dancing font-bold text-white mb-6">
+            Resultado Final
+          </h2>
+          
+          <div class="bg-gradient-to-r ${color} rounded-full p-8 mb-8 inline-block">
+            <div class="text-6xl font-bold text-white">
+              ${score}/${quizData.length}
+            </div>
+            <div class="text-xl text-white font-semibold">
+              ${percentage.toFixed(0)}%
+            </div>
+          </div>
+          
+          <p class="text-2xl text-gray-200 mb-8 leading-relaxed">
+            ${message}
+          </p>
+          
+          <div class="space-y-4">
+            <button 
+              onclick="restartQuiz()" 
+              class="bg-gradient-to-r from-romantic-pink to-romantic-purple px-8 py-4 rounded-full text-white text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 mr-4"
+            >
+              🔄 Tentar Novamente
+            </button>
+            <a 
+              href="/pedido" 
+              class="inline-block glass-effect px-8 py-4 rounded-full text-white hover:bg-white hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
+            >
+              💍 Ver a Surpresa Final
+            </a>
+          </div>
+        </div>
+      `;
+    }
+    
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      loadQuestion();
+    }
+    
+    // Inicializar quiz
+    document.addEventListener('DOMContentLoaded', () => {
+      loadQuestion();
+    });
+  </script>
+</body>
+</html>

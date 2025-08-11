@@ -10,10 +10,15 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@types/node": "^24.2.1",
     "astro": "^5.12.9",
+    "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.539.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "tailwindcss": "^3.4.17",
     "tsparticles-slim": "^2.12.0"
   }
 }

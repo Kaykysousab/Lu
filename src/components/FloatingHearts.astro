@@ -1,0 +1,35 @@
+---
+// src/components/FloatingHearts.astro
+---
+
+<div class="floating-hearts" id="floating-hearts"></div>
+
+<script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💖';
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+    
+    const container = document.getElementById('floating-hearts');
+    if (container) {
+      container.appendChild(heart);
+      
+      setTimeout(() => {
+        if (heart.parentNode) {
+          heart.parentNode.removeChild(heart);
+        }
+      }, 8000);
+    }
+  }
+
+  // Criar corações a cada 2 segundos
+  setInterval(createHeart, 2000);
+  
+  // Criar alguns corações iniciais
+  for (let i = 0; i < 5; i++) {
+    setTimeout(createHeart, i * 400);
+  }
+</script>
