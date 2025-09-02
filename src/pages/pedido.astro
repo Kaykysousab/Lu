@@ -436,6 +436,14 @@ import '../styles/global.css';
       responseContent.appendChild(loveDiv);
     }
     
+    // Expose functions to global scope for onclick handlers
+    window.checkLogin = checkLogin;
+    window.revealSurprise = revealSurprise;
+    window.answerYes = answerYes;
+    window.answerMaybe = answerMaybe;
+    window.celebrateMore = celebrateMore;
+    window.showMoreLove = showMoreLove;
+    
     function createCelebration() {
       // Create floating hearts
       for (let i = 0; i < 20; i++) {
