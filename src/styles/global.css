@@ -99,6 +99,11 @@ body {
   100% { left: 100%; }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+
 /* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 8px;

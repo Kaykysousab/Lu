@@ -16,8 +16,51 @@ import '../styles/global.css';
   <Navigation />
   <FloatingHearts />
   
-  <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center relative pt-20">
+  <!-- Login Screen -->
+  <section id="login-screen" class="min-h-screen flex items-center justify-center relative pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900 via-rose-800 to-red-900"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    
+    <div class="relative z-10 w-full max-w-md mx-auto px-6">
+      <div class="glass-effect rounded-3xl p-8 text-center animate-fade-in">
+        <div class="text-6xl mb-6 animate-heart-beat">🔐</div>
+        <h1 class="text-4xl font-dancing font-bold text-white mb-6">
+          Baú do Tesouro
+        </h1>
+        <p class="text-lg text-gray-200 mb-8 leading-relaxed italic">
+          "Só o tempo dará a chave de acesso para você abrir esse baú"
+        </p>
+        
+        <div class="space-y-4">
+          <input
+            type="text"
+            id="username"
+            placeholder="Usuário"
+            class="w-full p-4 rounded-xl bg-white bg-opacity-20 text-white placeholder-gray-300 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-romantic-pink"
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Senha"
+            class="w-full p-4 rounded-xl bg-white bg-opacity-20 text-white placeholder-gray-300 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-romantic-pink"
+          />
+          <button
+            onclick="checkLogin()"
+            class="w-full bg-gradient-to-r from-romantic-pink to-romantic-purple p-4 rounded-xl text-white font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+          >
+            💖 Abrir Baú
+          </button>
+        </div>
+        
+        <div id="error-message" class="hidden mt-4 p-3 bg-red-500 bg-opacity-20 border border-red-400 rounded-lg text-red-200">
+          Credenciais incorretas. Tente novamente! 💕
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Surprise Content (Hidden Initially) -->
+  <section id="surprise-section" class="hidden min-h-screen flex items-center justify-center relative pt-20">
     <div class="absolute inset-0 bg-gradient-to-br from-pink-900 via-rose-800 to-red-900"></div>
     <div class="absolute inset-0 bg-black bg-opacity-40"></div>
     
@@ -37,6 +80,40 @@ import '../styles/global.css';
         <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed animate-slide-up">
           Ludmylla, chegou o momento mais importante... ✨
         </p>
+        
+        <!-- Photo Gallery -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="polaroid-container">
+            <div class="polaroid">
+              <img src="/lu (1).jpeg" alt="Ludmylla" class="w-full h-48 object-cover rounded-lg" />
+              <p class="polaroid-caption">Minha estrela ⭐</p>
+            </div>
+          </div>
+          <div class="polaroid-container">
+            <div class="polaroid">
+              <img src="/lu (2).jpeg" alt="Ludmylla" class="w-full h-48 object-cover rounded-lg" />
+              <p class="polaroid-caption">Meu sorriso 😊</p>
+            </div>
+          </div>
+          <div class="polaroid-container">
+            <div class="polaroid">
+              <img src="/lu (3).jpeg" alt="Ludmylla" class="w-full h-48 object-cover rounded-lg" />
+              <p class="polaroid-caption">Minha felicidade 💕</p>
+            </div>
+          </div>
+          <div class="polaroid-container">
+            <div class="polaroid">
+              <img src="/lu (4).jpeg" alt="Ludmylla" class="w-full h-48 object-cover rounded-lg" />
+              <p class="polaroid-caption">Meu amor 💖</p>
+            </div>
+          </div>
+          <div class="polaroid-container">
+            <div class="polaroid">
+              <img src="/lu (5).jpeg" alt="Ludmylla" class="w-full h-48 object-cover rounded-lg" />
+              <p class="polaroid-caption">Minha vida ✨</p>
+            </div>
+          </div>
+        </div>
         
         <!-- Surprise Container -->
         <div class="glass-effect rounded-3xl p-8 md:p-16 animate-slide-up max-w-4xl mx-auto" style="animation-delay: 0.5s;">
@@ -124,6 +201,61 @@ import '../styles/global.css';
   <ChatBot client:load />
   
   <script>
+    function checkLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      
+      if (username.toLowerCase() === 'amor' && password.toLowerCase() === 'ludmylls') {
+        // Login successful
+        const loginScreen = document.getElementById('login-screen');
+        const surpriseSection = document.getElementById('surprise-section');
+        
+        loginScreen.style.opacity = '0';
+        loginScreen.style.transform = 'translateY(-50px)';
+        loginScreen.style.transition = 'all 0.8s ease';
+        
+        setTimeout(() => {
+          loginScreen.classList.add('hidden');
+          surpriseSection.classList.remove('hidden');
+          surpriseSection.style.opacity = '0';
+          surpriseSection.style.transform = 'translateY(50px)';
+          
+          setTimeout(() => {
+            surpriseSection.style.opacity = '1';
+            surpriseSection.style.transform = 'translateY(0)';
+            surpriseSection.style.transition = 'all 1s ease';
+          }, 100);
+        }, 800);
+        
+        createCelebration();
+      } else {
+        // Login failed
+        errorMessage.classList.remove('hidden');
+        errorMessage.classList.add('animate-fade-in');
+        
+        // Shake effect for wrong credentials
+        const loginContainer = document.querySelector('.glass-effect');
+        loginContainer.style.animation = 'shake 0.5s ease-in-out';
+        
+        setTimeout(() => {
+          loginContainer.style.animation = '';
+        }, 500);
+      }
+    }
+    
+    // Allow Enter key to submit
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputs = document.querySelectorAll('#username, #password');
+      inputs.forEach(input => {
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            checkLogin();
+          }
+        });
+      });
+    });
+    
     function revealSurprise() {
       const initialMessage = document.getElementById('initial-message');
       const surpriseContent = document.getElementById('surprise-content');
@@ -356,5 +488,47 @@ import '../styles/global.css';
       }
     }
   </script>
+  
+  <style>
+    .polaroid-container {
+      display: flex;
+      justify-content: center;
+      margin: 1rem;
+    }
+    
+    .polaroid {
+      background: white;
+      padding: 1rem 1rem 3rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: rotate(-2deg);
+      transition: all 0.3s ease;
+      max-width: 250px;
+    }
+    
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+    
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .polaroid-caption {
+      color: #333;
+      text-align: center;
+      margin-top: 0.5rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  </style>
 </body>
 </html>
