@@ -31,7 +31,7 @@ const ChatBot: React.FC = () => {
     'cor favorita': 'A cor favorita da Ludmylla é rosa! 💗 Ela ama tudo que é romântico e delicado.',
     'comida favorita': 'Ela é apaixonada por chocolate! 🍫 E também adora pizza nos finais de semana.',
     'filme favorito': 'Ludmylla ama filmes românticos! 🎬 Especialmente aqueles que fazem chorar de emoção.',
-    'música favorita': 'Ela adora música romântica e pop! 🎵 Sempre cantando no chuveiro.',
+    'música favorita': 'Ela adora música MPB! 🎵 Sempre cantando.',
     'hobby': 'Ludmylla adora ler livros românticos e assistir séries! 📚✨',
     'sonho': 'O maior sonho dela é viajar pelo mundo com quem ama! ✈️💕',
     'medo': 'Ela tem um medinho bobo de baratas! 🪳 Mas é corajosa em tudo mais.',
@@ -39,6 +39,11 @@ const ChatBot: React.FC = () => {
     'defeito': 'Ela é perfeccionista demais às vezes! 😅 Mas isso a torna ainda mais especial.',
     'segredo': 'Ela guarda todas as mensagens carinhosas que recebe! 💌 É muito sentimental.',
     'personalidade': 'Ludmylla é doce, carinhosa, inteligente e tem um sorriso que ilumina qualquer dia! ☀️',
+    'fria': 'Ludmylla é Fria, mais por dentro é carinhosa, e meiga com aquele sorriso maravilhoso! ☀️',
+    'chata': 'Ludmylla não é chata ela tem seu jeitnho unico de ser ela mesma. 😉',
+    'feia': 'Na verdade ela é maravilhosa causa inveja por ser perfeita como a estrela com cores unicas e cheio de luz como o espaço, bem ela é uma rainha no seu habitat natural 👑',
+    'tristeza': 'ela diz que a vida adulta é complicada, as vezes ela se senti para baixo mais deve lembra que tem o kayky sempre do seu lado cuidando e apoiando ela em todos os momentos! 😉',
+    'triste': 'ela diz que a vida adulta é complicada, as vezes ela se senti para baixo mais deve lembra que tem o kayky sempre do seu lado cuidando e apoiando ela em todos os momentos! 😉',
     'estilo': 'Ela tem um estilo único e sempre está linda! 👗✨ Ama se arrumar para ocasiões especiais.'
   };
 
